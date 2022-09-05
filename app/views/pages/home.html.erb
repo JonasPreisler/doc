@@ -1,0 +1,34 @@
+
+  <%= form_for Document.new do |f| %>
+
+    <%= f.file_field :file, class: "form-control" %>
+    <br>
+    <%= f.submit "Upload", class: "btn btn-primary" %>
+
+  <% end %>
+
+<hr>
+
+
+  <% Document.all.each do |doc| %>
+
+    <% doc.paragraphs.each do |paragraph| %>
+
+      <div><%= paragraph.number %>: <%= paragraph.text %></div>
+
+      <% if paragraph.changed_paragraph %>
+        <span class="bg-rounded bg-warning bg-shadow-sm">
+          The above paragraph is changed
+        </span>
+      <% end %>
+
+    <% end %>
+
+    <br>
+
+    <%= button_to "Delete", document_path(doc), method: :delete, class: "btn btn-sm btn-danger" %>
+
+    <hr>
+
+  <% end %>
+  
